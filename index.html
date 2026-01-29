@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Omnitrix Archive | Dark Edition</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -10,9 +10,9 @@
 
     <style>
         :root {
-            --primary: #10b981; /* Emerald 500 */
-            --bg-dark: #0f172a; /* Slate 900 */
-            --card-bg: #1e293b; /* Slate 800 */
+            --primary: #10b981;
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
             --text-main: #f1f5f9;
             --text-muted: #94a3b8;
         }
@@ -26,7 +26,6 @@
 
         .font-sync { font-family: 'Syncopate', sans-serif; }
 
-        /* Dark Mode Glassmorphism */
         .card-glass {
             background: rgba(30, 41, 59, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -43,7 +42,6 @@
             border-color: var(--primary);
         }
 
-        /* Nav Styling */
         nav {
             background: rgba(15, 23, 42, 0.8) !important;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
@@ -54,6 +52,7 @@
             filter: drop-shadow(0 0 40px rgba(16, 185, 129, 0.3));
             transition: all 0.6s ease;
         }
+
         .hero-img:hover {
             transform: scale(1.05) rotate(-2deg);
             filter: drop-shadow(0 0 60px rgba(16, 185, 129, 0.5));
@@ -96,15 +95,22 @@
             border-color: var(--primary);
         }
 
-        .season-episodes {
+        /* Pure CSS Toggle Logic */
+        .season-toggle {
             display: none;
-            margin-top: 1.5rem;
-            animation: fadeIn 0.4s ease forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .episode-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .season-toggle:checked ~ .episode-container {
+            max-height: 1000px; /* Increased for longer lists */
+            opacity: 1;
+            margin-top: 1.5rem;
         }
 
         .section-title::after {
@@ -117,30 +123,21 @@
             border-radius: 2px;
         }
         
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary);
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
     </style>
 </head>
 <body class="selection:bg-emerald-500 selection:text-white">
 
 <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-4 flex justify-between items-center">
-    <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+    <a href="#home" class="flex items-center space-x-3">
         <div class="w-9 h-9 rounded-xl bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-900/50">
             <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
         </div>
         <span class="font-sync text-[12px] tracking-[0.3em] font-bold text-white">BEN 10</span>
-    </div>
+    </a>
     <div class="hidden md:flex space-x-10 text-[10px] tracking-widest font-bold uppercase text-slate-400">
         <a href="#home" class="hover:text-emerald-400 transition">Home</a>
         <a href="#seasons" class="hover:text-emerald-400 transition">Seasons</a>
@@ -154,28 +151,24 @@
     <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
         <div class="text-center lg:text-left">
             <span class="px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold text-[10px] uppercase tracking-widest mb-6 inline-block">
-                Author: Maksudul Munna
+                HIVE ARCHIVE SYSTEM
             </span>
             <h1 class="text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white leading-[1.1]">
-                BEN 10 CLASSIC <br><span class="text-emerald-500 uppercase">Bangla Dubbed.</span>
+                BEN 10 CLASSIC <br><span class="text-emerald-500 uppercase">Full Archive.</span>
             </h1>
             <p class="text-slate-400 text-lg mb-10 max-w-md mx-auto lg:mx-0">
-                A high-fidelity archival system for the Ben 10 Original Series. Experience the legacy through a premium dark-mode interface.
+                The HIVE mainframe has been fully synced. All seasons and primary DNA records are now online.
             </p>
             <div class="flex flex-wrap justify-center lg:justify-start gap-5">
                 <a href="#seasons" class="action-btn-primary">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    Watch
-                </a>
-                <a href="https://maxudul.github.io/Myself/" target="_blank" class="action-btn-secondary">
-                    <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                    Author
+                    Access Vault
                 </a>
             </div>
         </div>
         <div class="relative flex justify-center">
             <div class="absolute inset-0 bg-emerald-500/5 blur-[100px] rounded-full"></div>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Ben_10_reboot_logo.png" class="hero-img w-80 h-80 object-contain relative z-10">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Ben_10_reboot_logo.png" class="hero-img w-80 h-80 object-contain relative z-10" alt="Omnitrix Logo">
         </div>
     </div>
 </section>
@@ -184,10 +177,125 @@
     <div class="max-w-4xl mx-auto">
         <div class="mb-16 text-center">
             <h2 class="text-4xl font-bold text-white section-title">Archived Seasons</h2>
-            <p class="text-slate-400 text-sm mt-4">Browse chronologically sorted episodes from the HIVE vaults</p>
+            <p class="text-slate-400 text-sm mt-4">Complete seasonal logs retrieved from the HIVE vaults</p>
         </div>
-        <div class="space-y-6" id="seasons-list">
-            <!-- Injected via JS -->
+        
+        <div class="space-y-6">
+            <!-- Season 1 -->
+            <div class="card-glass p-6">
+                <input type="checkbox" id="s1" class="season-toggle">
+                <label for="s1" class="flex items-center justify-between cursor-pointer group">
+                    <div class="flex items-center space-x-6">
+                        <div class="w-14 h-14 bg-slate-900 border border-white/5 rounded-2xl flex items-center justify-center font-bold text-emerald-500 shadow-inner group-hover:border-emerald-500/50">S1</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white group-hover:text-emerald-400">Season 1</h3>
+                            <p class="text-xs text-slate-500">The Beginning</p>
+                        </div>
+                    </div>
+                    <div class="px-5 py-2 rounded-xl bg-emerald-500/10 text-emerald-400 text-[10px] font-bold uppercase tracking-widest border border-emerald-500/20 group-hover:bg-emerald-500 group-hover:text-black">Expand</div>
+                </label>
+                <div class="episode-container space-y-3">
+                    <div class="flex items-center justify-between bg-white/5 p-4 rounded-xl border border-white/5">
+                        <h4 class="font-semibold text-slate-200 text-sm">And Then There Were 10</h4>
+                        <a href="#" class="text-[10px] font-bold text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-lg hover:bg-emerald-500 hover:text-black">DOWNLOAD</a>
+                    </div>
+                    <div class="flex items-center justify-between bg-white/5 p-4 rounded-xl border border-white/5">
+                        <h4 class="font-semibold text-slate-200 text-sm">Washington B.C.</h4>
+                        <a href="#" class="text-[10px] font-bold text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-lg hover:bg-emerald-500 hover:text-black">DOWNLOAD</a>
+                    </div>
+                    <div class="flex items-center justify-between bg-white/5 p-4 rounded-xl border border-white/5">
+                        <h4 class="font-semibold text-slate-200 text-sm">The Krakken</h4>
+                        <a href="#" class="text-[10px] font-bold text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-lg hover:bg-emerald-500 hover:text-black">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Season 2 -->
+            <div class="card-glass p-6">
+                <input type="checkbox" id="s2" class="season-toggle">
+                <label for="s2" class="flex items-center justify-between cursor-pointer group">
+                    <div class="flex items-center space-x-6">
+                        <div class="w-14 h-14 bg-slate-900 border border-white/5 rounded-2xl flex items-center justify-center font-bold text-emerald-500 shadow-inner group-hover:border-emerald-500/50">S2</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white group-hover:text-emerald-400">Season 2</h3>
+                            <p class="text-xs text-slate-500">New Threats</p>
+                        </div>
+                    </div>
+                    <div class="px-5 py-2 rounded-xl bg-emerald-500/10 text-emerald-400 text-[10px] font-bold uppercase tracking-widest border border-emerald-500/20 group-hover:bg-emerald-500 group-hover:text-black">Expand</div>
+                </label>
+                <div class="episode-container space-y-3">
+                    <div class="flex items-center justify-between bg-white/5 p-4 rounded-xl border border-white/5">
+                        <h4 class="font-semibold text-slate-200 text-sm">Truth</h4>
+                        <a href="#" class="text-[10px] font-bold text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-lg hover:bg-emerald-500 hover:text-black">DOWNLOAD</a>
+                    </div>
+                    <div class="flex items-center justify-between bg-white/5 p-4 rounded-xl border border-white/5">
+                        <h4 class="font-semibold text-slate-200 text-sm">Double Identity</h4>
+                        <a href="#" class="text-[10px] font-bold text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-lg hover:bg-emerald-500 hover:text-black">DOWNLOAD</a>
+                    </div>
+                    <div class="flex items-center justify-between bg-white/5 p-4 rounded-xl border border-white/5">
+                        <h4 class="font-semibold text-slate-200 text-sm">The Big Tick</h4>
+                        <a href="#" class="text-[10px] font-bold text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-lg hover:bg-emerald-500 hover:text-black">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Season 3 -->
+            <div class="card-glass p-6">
+                <input type="checkbox" id="s3" class="season-toggle">
+                <label for="s3" class="flex items-center justify-between cursor-pointer group">
+                    <div class="flex items-center space-x-6">
+                        <div class="w-14 h-14 bg-slate-900 border border-white/5 rounded-2xl flex items-center justify-center font-bold text-emerald-500 shadow-inner group-hover:border-emerald-500/50">S3</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white group-hover:text-emerald-400">Season 3</h3>
+                            <p class="text-xs text-slate-500">The Visitor Arc</p>
+                        </div>
+                    </div>
+                    <div class="px-5 py-2 rounded-xl bg-emerald-500/10 text-emerald-400 text-[10px] font-bold uppercase tracking-widest border border-emerald-500/20 group-hover:bg-emerald-500 group-hover:text-black">Expand</div>
+                </label>
+                <div class="episode-container space-y-3">
+                    <div class="flex items-center justify-between bg-white/5 p-4 rounded-xl border border-white/5">
+                        <h4 class="font-semibold text-slate-200 text-sm">Ben 10,000 Returns</h4>
+                        <a href="#" class="text-[10px] font-bold text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-lg hover:bg-emerald-500 hover:text-black">DOWNLOAD</a>
+                    </div>
+                    <div class="flex items-center justify-between bg-white/5 p-4 rounded-xl border border-white/5">
+                        <h4 class="font-semibold text-slate-200 text-sm">Grudge Match</h4>
+                        <a href="#" class="text-[10px] font-bold text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-lg hover:bg-emerald-500 hover:text-black">DOWNLOAD</a>
+                    </div>
+                    <div class="flex items-center justify-between bg-white/5 p-4 rounded-xl border border-white/5">
+                        <h4 class="font-semibold text-slate-200 text-sm">The Visitor</h4>
+                        <a href="#" class="text-[10px] font-bold text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-lg hover:bg-emerald-500 hover:text-black">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Season 4 -->
+            <div class="card-glass p-6">
+                <input type="checkbox" id="s4" class="season-toggle">
+                <label for="s4" class="flex items-center justify-between cursor-pointer group">
+                    <div class="flex items-center space-x-6">
+                        <div class="w-14 h-14 bg-slate-900 border border-white/5 rounded-2xl flex items-center justify-center font-bold text-emerald-500 shadow-inner group-hover:border-emerald-500/50">S4</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white group-hover:text-emerald-400">Season 4</h3>
+                            <p class="text-xs text-slate-500">The Negative 10</p>
+                        </div>
+                    </div>
+                    <div class="px-5 py-2 rounded-xl bg-emerald-500/10 text-emerald-400 text-[10px] font-bold uppercase tracking-widest border border-emerald-500/20 group-hover:bg-emerald-500 group-hover:text-black">Expand</div>
+                </label>
+                <div class="episode-container space-y-3">
+                    <div class="flex items-center justify-between bg-white/5 p-4 rounded-xl border border-white/5">
+                        <h4 class="font-semibold text-slate-200 text-sm">Goodbye and Good Riddance</h4>
+                        <a href="#" class="text-[10px] font-bold text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-lg hover:bg-emerald-500 hover:text-black">DOWNLOAD</a>
+                    </div>
+                    <div class="flex items-center justify-between bg-white/5 p-4 rounded-xl border border-white/5">
+                        <h4 class="font-semibold text-slate-200 text-sm">The Negative 10 (Part 1 & 2)</h4>
+                        <a href="#" class="text-[10px] font-bold text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-lg hover:bg-emerald-500 hover:text-black">DOWNLOAD</a>
+                    </div>
+                    <div class="flex items-center justify-between bg-white/5 p-4 rounded-xl border border-white/5">
+                        <h4 class="font-semibold text-slate-200 text-sm">Secret of the Omnitrix</h4>
+                        <a href="#" class="text-[10px] font-bold text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-lg hover:bg-emerald-500 hover:text-black">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -199,8 +307,79 @@
             <p class="text-emerald-500 font-bold text-xs tracking-[0.3em] uppercase mt-4">Active Species Registry</p>
         </div>
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="alien-grid">
-            <!-- Injected via JS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Alien Cards -->
+            <div class="card-glass p-8 flex flex-col h-full">
+                <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 border border-emerald-500/20">
+                    <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h4 class="font-bold text-white text-xl mb-1">Heatblast</h4>
+                <p class="text-emerald-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">Pyronite</p>
+                <p class="text-sm text-slate-400 leading-relaxed">Pyrokinesis & Heat Absorption</p>
+            </div>
+            
+            <div class="card-glass p-8 flex flex-col h-full">
+                <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 border border-emerald-500/20">
+                    <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h4 class="font-bold text-white text-xl mb-1">XLR8</h4>
+                <p class="text-emerald-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">Kineceleran</p>
+                <p class="text-sm text-slate-400 leading-relaxed">High-Velocity Movement</p>
+            </div>
+
+            <div class="card-glass p-8 flex flex-col h-full">
+                <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 border border-emerald-500/20">
+                    <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h4 class="font-bold text-white text-xl mb-1">Four Arms</h4>
+                <p class="text-emerald-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">Tetramand</p>
+                <p class="text-sm text-slate-400 leading-relaxed">Enhanced Physical Strength</p>
+            </div>
+
+            <div class="card-glass p-8 flex flex-col h-full">
+                <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 border border-emerald-500/20">
+                    <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h4 class="font-bold text-white text-xl mb-1">Diamondhead</h4>
+                <p class="text-emerald-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">Petrosapien</p>
+                <p class="text-sm text-slate-400 leading-relaxed">Crystal Manipulation</p>
+            </div>
+
+            <div class="card-glass p-8 flex flex-col h-full">
+                <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 border border-emerald-500/20">
+                    <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h4 class="font-bold text-white text-xl mb-1">Grey Matter</h4>
+                <p class="text-emerald-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">Galvan</p>
+                <p class="text-sm text-slate-400 leading-relaxed">Advanced Problem Solving</p>
+            </div>
+
+            <div class="card-glass p-8 flex flex-col h-full">
+                <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 border border-emerald-500/20">
+                    <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h4 class="font-bold text-white text-xl mb-1">Upgrade</h4>
+                <p class="text-emerald-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">Mechamorph</p>
+                <p class="text-sm text-slate-400 leading-relaxed">Technological Integration</p>
+            </div>
+
+            <div class="card-glass p-8 flex flex-col h-full">
+                <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 border border-emerald-500/20">
+                    <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h4 class="font-bold text-white text-xl mb-1">Stinkfly</h4>
+                <p class="text-emerald-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">Lepidopterran</p>
+                <p class="text-sm text-slate-400 leading-relaxed">Aerial Mobility & Toxins</p>
+            </div>
+
+            <div class="card-glass p-8 flex flex-col h-full">
+                <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 border border-emerald-500/20">
+                    <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h4 class="font-bold text-white text-xl mb-1">Ripjaws</h4>
+                <p class="text-emerald-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">Piscciss Volann</p>
+                <p class="text-sm text-slate-400 leading-relaxed">Aquatic Combat Specialization</p>
+            </div>
         </div>
     </div>
 </section>
@@ -210,90 +389,8 @@
         <div class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></div>
     </div>
     <div class="font-sync text-[12px] font-bold text-white mb-4 tracking-[0.5em]">BEN 10 CLASSIC</div>
-    <p class="text-[10px] text-slate-500 uppercase tracking-[0.3em]">System Interface Designed by Maksudul Munna &copy; 2024</p>
+    <p class="text-[10px] text-slate-500 uppercase tracking-[0.3em]">HIVE INTERFACE DESIGN &copy; 2024</p>
 </footer>
-
-<script>
-const seasonsData = {
-    1: [{ title: 'And Then There Were 10', download:'Drive Link' }, { title: 'Washington B.C.', download:'Drive Link' }, { title: 'The Krakken', download:'Drive Link' }],
-    2: [{ title: 'Truth', download:'Drive Link' }, { title: 'Double Identity', download:'Drive Link' }, { title: 'The Big Tick', download:'Drive Link' }],
-    3: [{ title: 'Ben 10,000 Returns', download:'Drive Link' }, { title: 'Grudge Match', download:'Drive Link' }, { title: 'The Visitor', download:'Drive Link' }],
-    4: [{ title: 'Goodbye and Good Riddance', download:'Drive Link' }, { title: 'The Negative 10', download:'Drive Link' }, { title: 'Secret of the Omnitrix', download:'Drive Link' }],
-};
-
-const alienData = [
-    { name: 'Heatblast', species: 'Pyronite', powers: 'Pyrokinesis & Heat Absorption' },
-    { name: 'XLR8', species: 'Kineceleran', powers: 'High-Velocity Movement' },
-    { name: 'Four Arms', species: 'Tetramand', powers: 'Enhanced Physical Strength' },
-    { name: 'Diamondhead', species: 'Petrosapien', powers: 'Crystal Manipulation' },
-    { name: 'Grey Matter', species: 'Galvan', powers: 'Advanced Problem Solving' },
-    { name: 'Upgrade', species: 'Mechamorph', powers: 'Technological Integration' },
-    { name: 'Stinkfly', species: 'Lepidopterran', powers: 'Aerial Mobility & Toxins' },
-    { name: 'Ripjaws', species: 'Piscciss Volann', powers: 'Aquatic Combat Specialization' }
-];
-
-// Ingest Seasons
-const seasonsList = document.getElementById('seasons-list');
-Object.keys(seasonsData).forEach(seasonNum => {
-    const seasonDiv = document.createElement('div');
-    seasonDiv.className = 'card-glass p-6';
-    
-    const headerRow = document.createElement('div');
-    headerRow.className = 'flex items-center justify-between cursor-pointer group';
-    headerRow.innerHTML = `
-        <div class="flex items-center space-x-6">
-            <div class="w-14 h-14 bg-slate-900 border border-white/5 rounded-2xl flex items-center justify-center font-bold text-emerald-500 shadow-inner transition group-hover:border-emerald-500/50">
-                S${seasonNum}
-            </div>
-            <div>
-                <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition">Season ${seasonNum}</h3>
-                <p class="text-xs text-slate-500 font-medium">Archived Episodes Available</p>
-            </div>
-        </div>
-        <div class="px-5 py-2 rounded-xl bg-emerald-500/10 text-emerald-400 text-[10px] font-bold uppercase tracking-widest border border-emerald-500/20 group-hover:bg-emerald-500 group-hover:text-black transition">
-            More
-        </div>
-    `;
-    
-    const episodeDiv = document.createElement('div');
-    episodeDiv.className = 'season-episodes space-y-3';
-    
-    seasonsData[seasonNum].forEach(ep => {
-        const epItem = document.createElement('div');
-        epItem.className = 'flex items-center justify-between bg-white/5 p-4 rounded-xl border border-white/5 hover:border-emerald-500/30 transition';
-        epItem.innerHTML = `
-            <h4 class="font-semibold text-slate-200 text-sm">${ep.title}</h4>
-            <a href="${ep.download}" target="_blank" class="text-[10px] font-bold text-emerald-400 bg-emerald-500/5 border border-emerald-500/20 px-4 py-2 rounded-lg hover:bg-emerald-500 hover:text-black transition uppercase tracking-widest">Download</a>
-        `;
-        episodeDiv.appendChild(epItem);
-    });
-    
-    seasonDiv.appendChild(headerRow);
-    seasonDiv.appendChild(episodeDiv);
-    seasonsList.appendChild(seasonDiv);
-    
-    headerRow.addEventListener('click', ()=>{
-        const isOpen = episodeDiv.style.display === 'block';
-        episodeDiv.style.display = isOpen ? 'none' : 'block';
-    });
-});
-
-// Ingest Aliens
-const alienGrid = document.getElementById('alien-grid');
-alienData.forEach(alien => {
-    const alienCard = document.createElement('div');
-    alienCard.className = 'card-glass p-8 flex flex-col h-full border-white/5';
-    alienCard.innerHTML = `
-        <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 border border-emerald-500/20">
-            <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-        </div>
-        <h4 class="font-bold text-white text-xl mb-1">${alien.name}</h4>
-        <p class="text-emerald-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">${alien.species}</p>
-        <p class="text-sm text-slate-400 leading-relaxed">${alien.powers}</p>
-    `;
-    alienGrid.appendChild(alienCard);
-});
-</script>
 
 </body>
 </html>
